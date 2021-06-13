@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:include src="modelo.xhtml"></ui:include>
+<body>
+	<ui:include src="menu.xhtml"></ui:include>
+
+	<h:form class="row justify-content-center align-items-center">
+		<h:panelGrid columns="2">
+
+			<h:outputLabel value="Numero (Codificação do Cargo)" for="N_C" />
+			<h:inputText id="N_C"
+				value="#{cargoController.cargo.tipo}"
+				class="form-control" />
+
+			<h:outputLabel value="Descrição" for="des" />
+			<h:inputText id="des" value="#{cargoController.cargo.descricao}"
+				class="form-control" />
+
+
+			<h:commandButton
+				class="btn btn-info btn-md col-12 row justify-content-center align-items-center "
+				value="     Salvar Cargo    " action="#{cargoController.gravar}" />
+
+		</h:panelGrid>
+
+	</h:form>
+
+
+</body>
+</html>

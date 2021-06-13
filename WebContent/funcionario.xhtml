@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<head>
+<meta charset="utf-8" />
+
+<title>Funcionario</title>
+</head>
+
+<h:body>
+	<h:form>
+		<fieldset>
+			<legend>Novo Funcionário</legend>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Nome" for="nome" />
+				<h:inputText id="nome"
+					value="#{funcionarioController.funcionario.nome}" />
+
+				<h:outputLabel value="Sexo" for="sexo" />
+				<h:selectOneRadio id="sexo"
+					value="#{funcionarioController.funcionario.sexo}">
+					<f:selectItems value="#{funcionarioController.todosSexos}"
+						var="sexo" itemLabel="#{sexo.descricao}" itemValue="#{sexo}" />
+				</h:selectOneRadio>
+
+				<h:outputLabel value="E-mail" for="email" />
+				<h:inputText id="email"
+					value="#{funcionarioController.funcionario.email}" />
+
+				<h:outputLabel value="Senha" for="senha" />
+				<h:inputText value="#{funcionarioController.funcionario.senha}">
+					<f:passThroughAttribute name="type" value="password"></f:passThroughAttribute>
+				</h:inputText>
+
+				<h:outputLabel value="Grupo" for="grupo"/>
+				<h:selectOneMenu id="grupo" value="#{funcionarioController.grupoId}">
+					<f:selectItem itemLabel="Selecionar" noSelectionOption="true" />
+					<f:selectItems value="#{funcionarioController.todosGrupos}" var="gr"
+						itemLabel="#{gr.nome}" itemValue="#{gr.id}" />
+				</h:selectOneMenu>
+
+				<h:commandButton value="Gravar"
+					action="#{funcionarioController.gravar}" />
+			</h:panelGrid>
+		</fieldset>
+	</h:form>
+
+	<h:form>
+		<h:dataTable value="#{funcionarioController.todosFuncionarios}"
+			var="fun">
+			<h:column>
+				<f:facet name="header">Identificador</f:facet>
+				<h:outputText value="#{fun.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				<h:outputText value="#{fun.nome}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Remover</f:facet>
+				<h:commandLink value="Remove"
+					action="#{funcionarioController.remover(fun)}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Atualizar</f:facet>
+				<h:commandLink value="Atualiza"
+					action="#{funcionarioController.carregar(fun)}" />
+			</h:column>
+		</h:dataTable>
+	</h:form>
+</h:body>
+
+</html>

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<head>
+<meta charset="utf-8" />
+
+<title>Grupo</title>
+</head>
+
+<h:body>
+
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Nome" for="nome" />
+			<h:inputText id="nome" value="#{grupoController.grupo.nome}" />
+
+			<h:outputLabel value="Funcionalidade" for="func" />
+			<h:selectManyCheckbox id="func" value="#{grupoController.funcionalidadesSelecionadas}">
+				
+				<f:selectItems value="#{grupoController.todasFuncionalidades}"
+					var="ff" itemLabel="#{ff.nome}" itemValue="#{ff.id}" />
+			</h:selectManyCheckbox>
+			<h:commandButton value="Gravar" action="#{grupoController.gravar}" />
+		</h:panelGrid>
+	</h:form>
+
+	<h:form>
+		<h:dataTable value="#{grupoController.todosGrupos}" var="gr">
+			<h:column>
+				<f:facet name="header">Identificador</f:facet>
+				<h:outputText value="#{gr.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				<h:outputText value="#{gr.nome}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Remover</f:facet>
+				<h:commandLink value="Remove"
+					action="#{grupoController.remover(gr)}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Atualizar</f:facet>
+				<h:commandLink value="Atualiza"
+					action="#{grupoController.carregar(gr)}" />
+			</h:column>
+		</h:dataTable>
+	</h:form>
+
+</h:body>
+
+
+</html>

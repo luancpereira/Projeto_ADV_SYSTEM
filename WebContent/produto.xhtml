@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:f="http://xmlns.jcp.org/jsf/core">
+		
+<head>
+<title>JSF</title>
+</head>
+
+<h:body>
+	<h:form>
+	<fieldset>
+	<legend>Novo Produto</legend>
+	<h:panelGrid columns="2">
+		<h:outputLabel value="Nome" for="nome"/>
+		<h:inputText id="nome" value="#{produtoController.produto.nome}">
+			<f:passThroughAttribute name="placeholder" value="Digite o Produto"/>
+		</h:inputText>
+		
+		<h:outputLabel value="Quantidade" for="qtde"/>
+		<h:inputText id="qtde" value="#{produtoController.produto.qtde}">
+			<f:passThroughAttribute name="type" value="number"/>
+		</h:inputText>
+		
+		<h:outputLabel value="Quantidade Minima" for="qtdeMin"/>
+		<h:inputText id="qtdeMin" value="#{produtoController.produto.qtdeMin}">
+			<f:passThroughAttribute name="type" value="number"/>
+		</h:inputText>		
+		<h:outputLabel value="Valor" for="valor"/>
+		<h:inputText id="valor" value="#{produtoController.produto.valor}">
+			<f:passThroughAttribute name="type" value="number"/>
+				<f:passThroughAttribute name="step" value="0.1"/>
+		</h:inputText>
+		
+		<h:outputLabel value="Tipo" for="tipo"/>
+		<h:selectOneMenu id="tipo" value="#{produtoController.tipoId}">
+			<f:selectItem itemLabel="Selecionar" noSelectionOption="true" />
+			<f:selectItems value="#{produtoController.todosTipos}" var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo.id}" />
+		</h:selectOneMenu>
+		 
+
+		
+		<h:commandButton value="Gravar" placeholder="Gravar" action="#{produtoController.gravar}"/>
+		
+		<h:commandLink value="Novo Tipo" action="Tipo?faces-redirect=true"/>
+		</h:panelGrid>
+		</fieldset>
+		
+	</h:form>
+	
+	
+	<h:form>
+	<h:dataTable value="#{produtoController.todosProdutos}" var="prod">
+		<h:column>
+		<f:facet name="header">Identificador</f:facet>
+		<h:outputText value="#{prod.id}"/>
+		
+			<f:facet name="header">Nome</f:facet>
+			<h:outputText value="#{prod.nome}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Remover</f:facet>
+			<h:commandLink value="remove" action="#{produtoController.remover(prod)}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Atualizar</f:facet>
+			<h:commandLink value="atualiza" action="#{produtoController.carregar(prod)}"/>
+		</h:column>
+		
+	</h:dataTable>
+	</h:form>
+</h:body>
+
+</html>

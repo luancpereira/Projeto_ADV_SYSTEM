@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:include src="modelo.xhtml"></ui:include>
+<body>
+	<ui:include src="menu.xhtml"></ui:include>
+
+	<h:form>
+		<h:panelGrid columns="2">
+
+			<h:outputLabel value="N° do Processo" for="N_P" />
+			<h:inputText id="N_P"
+				value="#{processoController.processos.numeroProcesso}" />
+
+			<h:outputLabel value="Vara de Origem" for="vara" />
+			<h:inputText id="vara" value="#{processoController.processos.vara}" />
+
+			<h:outputLabel value="Juiz" for="juiz" />
+			<h:inputText id="juiz" value="#{processoController.processos.juiz}" />
+
+			<h:outputLabel value="Tipo" for="tipo" />
+			<h:selectOneRadio id="tipo"
+				value="#{processoController.processos.tipo}">
+				<f:selectItems value="#{processoController.todosTipos}" var="s"
+					itemLabel="#{s.descricao}" itemValue="#{s}" />
+			</h:selectOneRadio>
+
+			<h:outputLabel value="Data Inicio" for="dataEntrada" />
+			<h:inputText id="dataEntrada"
+				value="#{processoController.processos.dataEntrada.time}">
+				<f:convertDateTime pattern="yyyy-MM-dd" timeZone="America/Sao_Paulo" />
+				<f:passThroughAttribute name="type" value="date" />
+			</h:inputText>
+
+			<h:commandButton value="     Salvar    "
+				action="#{processoController.gravar}" />
+
+		</h:panelGrid>
+
+	</h:form>
+
+
+</body>
+</html>
